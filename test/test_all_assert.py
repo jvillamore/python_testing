@@ -3,6 +3,8 @@ import unittest
 
 class AllAssertsTests(unittest.TestCase):
 
+    SERVER = "server_b"
+
     def test_assert_equal(self):
         self.assertEqual(10, 10)
         self.assertEqual("Hola", "Hola")
@@ -29,3 +31,29 @@ class AllAssertsTests(unittest.TestCase):
             {1, 2, 3},
             {1, 2, 3}
         )
+
+    @unittest.skip("Trabjo en progreso, será habilitada nuevamente")
+    def test_skip(self):
+        self.assertEqual("hola", "chao")
+
+    @unittest.skipIf(SERVER == "server_b", "Saltado porque no estamos en el servidor")
+    def test_skip_if(self):
+        self.assertEqual(100, 100)
+
+    @unittest.expectedFailure
+    def test_expected_failure(self):
+        self.assertEqual(100, 150)
+
+
+'''
+    Estructura sugerida:
+
+    test_MétodoProbado_escenario_ResultadoEsperado
+
+    Ejemplo de la clase:
+
+    Método probado: deposit
+    escenario: positive amount
+    resultado esperado: increase balance
+    test_deposit_positive_amount_increase_balance
+'''
